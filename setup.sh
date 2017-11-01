@@ -8,7 +8,7 @@ PASSWORD='123'
 PROJECTFOLDER='projeto'
 PROJECTNAME="website"
 GITNAME="seu nome"
-GITEMAIL="seunome@seunome"
+GITEMAIL="seuemal@seuemail"
 
 echo "--- criar pasta do projeto ---"
 sudo mkdir "/var/www/html/${PROJECTFOLDER}"
