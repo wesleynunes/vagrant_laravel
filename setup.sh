@@ -19,16 +19,16 @@ echo "--- update / upgrade ---"
 sudo apt-get update
 sudo apt-get -y upgrade
 
-echo "--- instalar apache2 and php5 ---"
+echo "--- instalar apache2, php ---"
 sudo apt-get -y install apache2
 sudo apt-get -y install php libapache2-mod-php
 
 echo "--- instalar cURL and Mcrypt ---"
-sudo apt-get -y install python-software-properties
-sudo add-apt-repository -y ppa:ondrej/php
-sudo apt-get -y install php libapache2-mod-php php-mcrypt php-mysql  
-sudo apt-get -y install php7.0 libapache2-mod-php7.0 php7.0-mcrypt php7.0-mysql
-sudo apt-get -y install php7.0-sqlite3
+sudo apt-get -y install php-curl
+sudo apt-get -y install php-mcrypt
+sudo apt-get -y install php7.0-mbstring
+sudo apt-get -y install php-xml
+sudo apt-get -y install php7.0-zip
 
 echo "--- instalar mysql e fornercer senha para o instalador -- "
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
@@ -72,11 +72,13 @@ git config --global user.name ${GITNAME}
 git config --global user.email ${GITEMAIL}
 
 echo "-- instalar composer"
-curl -s https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
-sudo chmod +x /usr/local/bin/composer
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 echo "-- gerar projeto laravel"
 composer create-project --prefer-dist laravel/laravel /var/www/html/${PROJECTFOLDER}/${PROJECTNAME}
+sudo chmod -R 777 /var/www/html/${PROJECTFOLDER}/
+
+echo "--- reiniciar apache ---"
+sudo service apache2 restart
     
 echo "[OK] --- Ambiente de desenvolvimento concluido ---"
