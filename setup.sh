@@ -3,7 +3,7 @@
 echo "--- Instalando pacotes para desenvolvimento [PHP 7, LARAVEL]"
 
 # Criar variaves para senha mysql, nome do projeto, projeto laravel e git
-echo "--- definir senha e nome do projeto ---"
+echo "--- definir  senha, nome do projeto, nome projeto laravel, nome email git---"
 PASSWORD='123'
 PROJECTFOLDER='projeto'
 PROJECTNAME="website"
