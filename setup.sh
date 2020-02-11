@@ -57,6 +57,10 @@ EOF
 )
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
 
+echo "--- instalando nodejs ---"
+sudo apt-get -y install nodejs
+sudo apt-get -y install npm
+
 echo "--- habilitar mod-rewrite do apache ---"
 sudo a2enmod rewrite
 
@@ -72,7 +76,10 @@ git config --global user.name ${GITNAME}
 git config --global user.email ${GITEMAIL}
 
 echo "-- instalar composer"
-curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+composer
+# curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
 echo "-- gerar projeto laravel"
 composer create-project --prefer-dist laravel/laravel /var/www/html/${PROJECTFOLDER}/${PROJECTNAME}
